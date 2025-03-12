@@ -15,7 +15,7 @@ and validating a suﬃcient number of headers. Any two willing parties can creat
 complete the transactions with nothing more than the respective blockchain nodes,
 without the need for a third party.
 1. Introduction
-T rades across blockchains relies almost exclusively on exchanges serving as trusted third parties to
+Trades across blockchains relies almost exclusively on exchanges serving as trusted third parties to
 process electronic trades. While the system works well enough for most trades, it still suﬀers from
 the inherent weaknesses of the trust based model. Completely peer-to-peer trades are not really
 commonplace, centralized exchanges are predominant in mediating the vast majority of cross
@@ -36,7 +36,7 @@ work on the Bitcoin network, and the suﬃciently capable programming instructio
 blockchain. The system is secure as long as the respective blockchains are secure, users can build
 and broadcast their transactions directly to blockchain nodes without the need of an intermediary or
 third party.
-1
+
 2. Proof-of-Work
 We can leverage the self-evident nature of proof-of-work signals to implement the cross
 Bitcoin-to-other-blockchain protocol. Recall that the Bitcoin blockchain uses a proof-of-work
@@ -59,6 +59,7 @@ which increases the security of the system in that Bitcoin miners cannot redirec
 power to Radiant in an attempt to forge Radiant headers when performing cross-blockchain swaps
 with third party blockchains. The full implications of the diﬀerent proof-of-work algorithms and
 security bounds are left for a future paper.
+
 3. Simplified Payment Verification
 Recall that it is possible to verify payments without running a full Bitcoin network node. The key to
 accepting cross blockchain payments is to use merkle-tree inclusion proofs, what Bitcoin calls
@@ -68,7 +69,6 @@ computed, with a high enough target diﬃculty. From the Bitcoin white paper:
 "A user only needs to keep a copy of the block headers of the longest proof-of-work chain, which he
 can get by querying network nodes until he's convinced he has the longest chain, and obtain the
 Merkle branch linking the transaction to the block it's timestamped. He can't check the transaction for
-2
 himself, but by linking it to a place in the chain, he can see that a network node has accepted it, and
 blocks added after it further confirm the network has accepted it.
 "
@@ -93,9 +93,9 @@ As long as the total value of the payments made on Bitcoi ,are less than some fr
 energy needed to forge an alternative chain of Bitcoin block headers, then the trade can be
 considered secure. In the next sections we describe how the peer-to-peer protocol works by
 leveraging this fact about the security guarantees that Simplified Payment Verification oﬀers.
+
 4. Standard Operation
 The standard operation steps of the protocol are as follows:
-3
 1. 2. 3. 4. Maker broadcasts a transaction to Radiant, with properties:
 1. Amount of Bitcoin Satoshis to receive for the trade.
 2. Amount of Radiant Photons oﬀered in exchange for the Bitcoin Satoshis.
@@ -114,7 +114,6 @@ ways.
 The first way allows it to be spent by anyone so long as they add the predetermined amount of
 Photons the initiating user expects. This acts as a form of bond or collateral to prevent malicious
 actors from intentionally disrupting a user from executing their trade intent. The collateral is refunded
-4
 when the trade is successfully completed, or it is forfeit if the elapsed time has passed. For example,
 it may be suﬃcient to give the buyer up to several blocks and perhaps much longer such as 200
 Bitcoin blocks to mitigate sudden Bitcoin network congestion which results in a transaction
@@ -127,6 +126,7 @@ could be added for a relayer service to monitor for these transactions continuou
 The third way the transaction may be spent is that the Maker user cancels the trade, spending it to
 themselves to prevent anyone else from taking the trade. The Maker can cancel the trade anytime
 and no time limit is needed.
+
 5. Multiway Blockchain Operation
 The protocol can be extended to leverage Radiant, acting as a secondary bonding blockchain, to
 connect any two proof-of-work based blockchains together such as Bitcoin, Litecoin, Dogecoin,
@@ -137,35 +137,36 @@ The multiway blockchain operation steps of the protocol are as follows:
 1. 2. 3. 4. The first and second proof of work algorithms types.
 Amount of first blockchain (ex: Bitcoin) units to receive for the trade.
 Amount of second blockchain (ex: Dogecoin) units oﬀered for the trade.
-Receive address of where T aker will send first blockchain units to Maker
-5. Number of block headers that will be required by the SPV proof. Example: 10 block
+Receive address of where Taker will send first blockchain units to Maker. 
+Number of block headers that will be required by the SPV proof. Example: 10 block
 headers.
+
 6. Extra collateral of Radiant Photons to cover the expected value of the trade.
+
 7. Contains a covenant that only unlocks the collateral Radiant Photons if a valid SPV
 proof is provided.
-T aker spends the the initiating user transaction to temporarily claim the trade:
-1. T aker attaches where they want to receive their second blockchain tokens
-2. T aker attaches their extra collateral of Radiant Photons in the same amount as Maker.
+Taker spends the the initiating user transaction to temporarily claim the trade:
+1. Taker attaches where they want to receive their second blockchain tokens
+2. Taker attaches their extra collateral of Radiant Photons in the same amount as Maker.
 T aker broadcasts the transaction to the receive address specified by the Maker in Step 1.
 Maker broadcasts their payment to the second blockchain to the receive address specified by
 the T aker in Step 2.
 Either party or service may broadcast the respective SPV proofs and required block headers
 of both blockchains and simultaneously release the collateral to both parties.
-5
 Diagram 4: Multiway Blockchain Operation Overview: Trade between Bitcoin and a Second
 blockchain using Radiant as facilitator.
 The multiway blockchain operation requires both parties to use Radiant units as the collateral and
 eﬀectively turns Radiant into a trustless bond service. The solution works between any two
 blockchains as long as they are based on proof-of-work: their SPV proof and header hash algorithms
 can be verified with the Radiant programming instruction set codes.
-6. Security
+
+Security
 The cost of attacking this protocol is at least equal to the total energy cost of producing the requisite
 number of forged block headers, and therefore the system is secure enough as long as the total
 aggregate value of cross blockchain trades is less than that amount. Since Simplified Payment
 Verification provides a probabilistic security measure, it is important to choose parameters carefully
 to ensure that the cost to attack is an order of magnitude greater than the value of the potential gain
 from any attempt to execute the attack and steal the locked outputs.
-6
 We consider the scenario of an attacker who generates a forged chain to supply the requisite number
 of blocks to be input in the unlocking script of the locked outputs, here we provide a calculation to
 show the total energy cost.
@@ -191,6 +192,7 @@ changing their preferences through various parameters fully in their control suc
 trades, increasing the required number of blocks to redeem, limiting a time window that the trade can
 take place, and also adjusting the diﬃculty target. The users have full control over their security
 parameters prior to posting or accepting a trade.
+
 7. Conclusion
 We have proposed a peer-to-peer protocol for cross-blockchain trades without relying on an
 intermediary. We started with the basic building blocks of proof-of-work and merkle-tree inclusion
@@ -202,16 +204,15 @@ given time window is less than the total energy cost required to forge a chain o
 protocol is secure. Users can create transactions for buy or sell oﬀers and publish and accept trades
 directly using the respective blockchain nodes. Users can post their oﬀers to any website, social
 network or forum. Additionally, we have proposed an extension to the protocol which allows the
-7
 interoperability between a third proof-of-work based blockchain with Radiant acting as the trustless
 intermediary using the Radiant token as a type of collateral to enable bi-directional peer-to-peer
 trades between Bitcoin, Radiant and any other proof-of-work based blockchain such as Litecoin,
 Dogecoin, Kaspa, Ethereum Classic and others.
+
 8. References
 [1] Satoshi Nakamoto,
 https://bitcoin.org/bitcoin.pdf, 2009.
 [2] "Radiant: A Peer-to-Peer Digital Asset System"
 "Bitcoin: A Peer-to-Peer Electronic Cash System"
 ,
-, https://radiantblockchain.org/radiant.pdf 2022.
-8
+, https://radiantblockchain.org/radiant.pdf 2022
