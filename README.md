@@ -14,7 +14,9 @@ Verification (SPV) and then release the coins on the second blockchain by accept
 and validating a suﬃcient number of headers. Any two willing parties can create and
 complete the transactions with nothing more than the respective blockchain nodes,
 without the need for a third party.
+
 1. Introduction
+
 Trades across blockchains relies almost exclusively on exchanges serving as trusted third parties to
 process electronic trades. While the system works well enough for most trades, it still suﬀers from
 the inherent weaknesses of the trust based model. Completely peer-to-peer trades are not really
@@ -38,6 +40,7 @@ and broadcast their transactions directly to blockchain nodes without the need o
 third party.
 
 2. Proof-of-Work
+
 We can leverage the self-evident nature of proof-of-work signals to implement the cross
 Bitcoin-to-other-blockchain protocol. Recall that the Bitcoin blockchain uses a proof-of-work
 consensus mechanism wherein Bitcoin miners scan for a value that when hashed, such as with
@@ -61,6 +64,7 @@ with third party blockchains. The full implications of the diﬀerent proof-of-w
 security bounds are left for a future paper.
 
 3. Simplified Payment Verification
+
 Recall that it is possible to verify payments without running a full Bitcoin network node. The key to
 accepting cross blockchain payments is to use merkle-tree inclusion proofs, what Bitcoin calls
 "Simplified Payment Verification (SPV)"
@@ -70,8 +74,7 @@ computed, with a high enough target diﬃculty. From the Bitcoin white paper:
 can get by querying network nodes until he's convinced he has the longest chain, and obtain the
 Merkle branch linking the transaction to the block it's timestamped. He can't check the transaction for
 himself, but by linking it to a place in the chain, he can see that a network node has accepted it, and
-blocks added after it further confirm the network has accepted it.
-"
+blocks added after it further confirm the network has accepted it."
 - Section 7, Bitcoin: A
 Peer-to-Peer Electronic Cash System, 2008
 Diagram 2: Simplified Payment Verification: validate transaction was included in a block and compare
@@ -85,8 +88,7 @@ transaction. The Bitcoin white paper continues:
 "As such, the verification is reliable as long as honest nodes control the network, but is more
 vulnerable if the network is overpowered by an attacker. While network nodes can verify transactions
 for themselves, the simplified method can be fooled by an attacker's fabricated transactions for as
-long as the attacker can continue to overpower the network.
-"
+long as the attacker can continue to overpower the network."
 - Section 7, Bitcoin: A Peer-to-Peer
 Electronic Cash System, 2008
 As long as the total value of the payments made on Bitcoi ,are less than some fraction of the total
@@ -95,6 +97,7 @@ considered secure. In the next sections we describe how the peer-to-peer protoco
 leveraging this fact about the security guarantees that Simplified Payment Verification oﬀers.
 
 4. Standard Operation
+
 The standard operation steps of the protocol are as follows:
 1. 2. 3. 4. Maker broadcasts a transaction to Radiant, with properties:
 1. Amount of Bitcoin Satoshis to receive for the trade.
@@ -128,6 +131,7 @@ themselves to prevent anyone else from taking the trade. The Maker can cancel th
 and no time limit is needed.
 
 5. Multiway Blockchain Operation
+
 The protocol can be extended to leverage Radiant, acting as a secondary bonding blockchain, to
 connect any two proof-of-work based blockchains together such as Bitcoin, Litecoin, Dogecoin,
 Kaspa, Ethereum Classic, etc. The key enabling technique is the use of Radiant Photons as a
@@ -161,6 +165,7 @@ blockchains as long as they are based on proof-of-work: their SPV proof and head
 can be verified with the Radiant programming instruction set codes.
 
 Security
+
 The cost of attacking this protocol is at least equal to the total energy cost of producing the requisite
 number of forged block headers, and therefore the system is secure enough as long as the total
 aggregate value of cross blockchain trades is less than that amount. Since Simplified Payment
@@ -194,6 +199,7 @@ take place, and also adjusting the diﬃculty target. The users have full contro
 parameters prior to posting or accepting a trade.
 
 7. Conclusion
+
 We have proposed a peer-to-peer protocol for cross-blockchain trades without relying on an
 intermediary. We started with the basic building blocks of proof-of-work and merkle-tree inclusion
 proofs, which together provides an eﬃciently computable and self-evident account of a transaction
@@ -210,6 +216,7 @@ trades between Bitcoin, Radiant and any other proof-of-work based blockchain suc
 Dogecoin, Kaspa, Ethereum Classic and others.
 
 8. References
+
 [1] Satoshi Nakamoto,
 https://bitcoin.org/bitcoin.pdf, 2009.
 [2] "Radiant: A Peer-to-Peer Digital Asset System"
